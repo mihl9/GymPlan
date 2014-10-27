@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - @localhost" uuid="ce1cb354-2996-4042-aa9c-bdf523eee743">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>gymplan.*</schema-pattern>
+      <default-schemas>gymplan.*</default-schemas>
+    </data-source>
+  </component>
+</project>
+

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - @localhost" uuid="ce1cb354-2996-4042-aa9c-bdf523eee743">
+    <database-info product="MySQL" version="5.6.20" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.31 ( Revision: alexander.soklakov@oracle.com-20140520065950-groqzzbvxprqdmnz )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="gymplan"/>
+    <table name="t_einheit" schema="" catalog="gymplan" type="TABLE">
+      <column name="EinheitID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="EinheitTrinID_FK" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="EinheitDatum" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="EinheitID"/>
+      <foreign-key name="EinheitToTrainPlan" columns="EinheitTrinID_FK" ref-table="t_trainingsplaene" ref-schema="" ref-catalog="gymplan" ref-columns="TrainID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="UebungToEinheit" table="t_uebungen" schema="" catalog="gymplan" columns="UebEinheitID_FK"/>
+      <index name="EinheitToTrainPlan_idx" unique="false" columns="EinheitTrinID_FK"/>
+    </table>
+    <table name="t_geraete" schema="" catalog="gymplan" type="TABLE">
+      <column name="GeraeteID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="GeraeteUsrID_FK" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="GerateName" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="GeraeteBez" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="GeraeteID"/>
+      <foreign-key name="GerateToUser" columns="GeraeteUsrID_FK" ref-table="t_users" ref-schema="" ref-catalog="gymplan" ref-columns="UserID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="UebungToGeraete" table="t_uebungen" schema="" catalog="gymplan" columns="UebGeraeteID_FK"/>
+      <index name="GerateToUser_idx" unique="false" columns="GeraeteUsrID_FK"/>
+    </table>
+    <table name="t_trainingsplaene" schema="" catalog="gymplan" type="TABLE">
+      <column name="TrainID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="TrainUserID_FK" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="TrainName" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="TrainID"/>
+      <foreign-key name="UserToTrain" columns="TrainUserID_FK" ref-table="t_users" ref-schema="" ref-catalog="gymplan" ref-columns="UserID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="EinheitToTrainPlan" table="t_einheit" schema="" catalog="gymplan" columns="EinheitTrinID_FK"/>
+      <exported-key name="UebungToTrainPlan" table="t_uebungen" schema="" catalog="gymplan" columns="UebTrainID_FK"/>
+      <index name="UserToTrain" unique="false" columns="TrainUserID_FK"/>
+    </table>
+    <table name="t_uebungen" schema="" catalog="gymplan" type="TABLE">
+      <column name="UebID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="UebTrainID_FK" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="UebEinheitID_FK" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="UebGeraeteID_FK" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="UebGewicht" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="UebSaetze" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="UebWiederholungen" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="UebSkipped" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <primary-key name="PRIMARY" columns="UebID"/>
+      <foreign-key name="UebungToEinheit" columns="UebEinheitID_FK" ref-table="t_einheit" ref-schema="" ref-catalog="gymplan" ref-columns="EinheitID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="UebungToGeraete" columns="UebGeraeteID_FK" ref-table="t_geraete" ref-schema="" ref-catalog="gymplan" ref-columns="GeraeteID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="UebungToTrainPlan" columns="UebTrainID_FK" ref-table="t_trainingsplaene" ref-schema="" ref-catalog="gymplan" ref-columns="TrainID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="UebungToEinheit_idx" unique="false" columns="UebEinheitID_FK"/>
+      <index name="UebungToGeraete_idx" unique="false" columns="UebGeraeteID_FK"/>
+      <index name="UebungToTrainPlan_idx" unique="false" columns="UebTrainID_FK"/>
+    </table>
+    <table name="t_users" schema="" catalog="gymplan" type="TABLE">
+      <column name="UserID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="UserVorname" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UserNachname" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UserEmail" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UserNickname" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UserPasswort" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UserLastLogin" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="UserIsInaktiv" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="UserIcon" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="UserID"/>
+      <exported-key name="GerateToUser" table="t_geraete" schema="" catalog="gymplan" columns="GeraeteUsrID_FK"/>
+      <exported-key name="UserToTrain" table="t_trainingsplaene" schema="" catalog="gymplan" columns="TrainUserID_FK"/>
+    </table>
+  </data-source>
+</component>
