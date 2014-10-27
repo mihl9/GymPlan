@@ -7,30 +7,49 @@
  */
 
 abstract class AbsController {
-    private static $isActive = false;
-
-    public static function getIsLoaded(){
-        return self::$isActive;
-    }
+    public static $ActiveController = 'none';
+    protected $view;
+    protected $model;
 
     public function __construct(){
         //Set the var to true that the Controller is loaded
         //this is necessary for the Navigationbar
-        self::$isActive = true;
+        //self::$ActiveController = true;
+        $this->view = new view();
+        $this->model = new model();
     }
 
     public function __destruct(){
         //Set the var to true that the Controller is not loaded
         //this is necessary for the Navigationbar
         self::$isActive = false;
+        $this->view = null;
+        $this->model = null;
     }
 
-    public function checkIfLoggedIn($bShowLogginBox){
+    protected function checkIfLogedIn($bShowLogginBox){
         $session = SessionHandler::getInstance();
+        $config = Config::getInstance();
         if(isset($session->isLoggedIn)){
-
+            if($session->isLoggedIn==true){
+                $this->view->DisplayLoginBoxLoggedIn($this->model->getLogedInUserInformation);
+            }else{
+                $this->view->DisplayLoginBox($config->getConfig('canRegister'));
+            }
         }else{
-
+            $this->view->DisplayLoginBox($config->getConfig('canRegister'));
         }
     }
+
+    public function login(){
+
+    }
+
+    public function logout(){
+
+    }
+    /**
+     * @return mixed
+     */
+    abstract public function run();
 } 

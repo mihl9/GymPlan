@@ -97,12 +97,14 @@ class DatabaseHandler {
     public function GetLastID(){
         $result=0;
         //todo: funktion implementieren
+        $SQL="";
         return $result;
     }
 
-    public function GetNumberOfRows(){
+    public function GetNumberOfRows($sql){
         $result=0;
         //todo: funktion implementieren
+        $result = $this->executeWithResult($sql)['count'];
         return $result;
     }
 

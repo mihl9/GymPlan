@@ -1,13 +1,16 @@
 <?php
-class controller{
-	private $view;
-        	private $model;
+class controller extends AbsController{
+
 	public function __construct() {
-		$this->model	= new model();
-		$this->view	= new view();
+        parent::__construct();
+        self::$ActiveController="uebersicht";
 	}
 	public function display(){
 		echo $this->view->showtxt($this->model->data);
 	}
+
+    public function run(){
+
+    }
 }
 ?>
