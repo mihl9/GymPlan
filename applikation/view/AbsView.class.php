@@ -37,6 +37,18 @@ abstract class AbsView {
     public abstract function setTemplate($template);
 
     /**
+     * Inserts the Loginbox into the Content Array
+     */
+    public function LoadLoginBox(){
+
+    }
+
+    /**
+     * Insert the Code for a Modal Window into the Content Array
+     */
+    abstract public function DisplayModalWindow();
+
+    /**
      * get template content
      * @return string: output of template
      */
@@ -50,4 +62,6 @@ abstract class AbsView {
         }
         return "Template cannot open.";
     }
+
+
 } 

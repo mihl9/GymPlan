@@ -27,12 +27,12 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Übersicht <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="?content=uebersicht&tab=1">Aktuell</a></li>
-                                    <li><a href="?content=uebersicht&tab=2">Verlauf</a></li>
+                                    <li><a href="?controller=uebersicht&tab=1">Aktuell</a></li>
+                                    <li><a href="?controller=uebersicht&tab=2">Verlauf</a></li>
                                 </ul>
                             </li>
-                            <li <?php if($content=="trainingsplaene") echo 'class="active"' ?>><a href="?content=trainingsplaene">Trainingspläne</a></li>
-                            <li <?php if($content=="geraete") echo 'class="active"' ?>><a href="?content=geraete">Geräte</a></li>
+                            <li <?php if($content=="trainingsplaene") echo 'class="active"' ?>><a href="?controller=trainingsplaene">Trainingspläne</a></li>
+                            <li <?php if($content=="geraete") echo 'class="active"' ?>><a href="?controller=geraete">Geräte</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
