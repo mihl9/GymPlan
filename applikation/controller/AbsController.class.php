@@ -24,4 +24,13 @@ abstract class AbsController {
         //this is necessary for the Navigationbar
         self::$isActive = false;
     }
+
+    public function checkIfLoggedIn($bShowLogginBox){
+        $session = SessionHandler::getInstance();
+        if(isset($session->isLoggedIn)){
+
+        }else{
+
+        }
+    }
 } 

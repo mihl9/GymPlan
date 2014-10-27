@@ -39,8 +39,12 @@ abstract class AbsView {
     /**
      * Inserts the Loginbox into the Content Array
      */
-    public function LoadLoginBox(){
+    public function DisplayLoginBoxLoggedIn($UserID, $Username, $LastLogin){
 
+    }
+
+    public function DisplayLoginBox($RegisterEnabled){
+        $this->content['RightBoxes']= "";
     }
 
     /**

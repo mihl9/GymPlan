@@ -99,6 +99,57 @@ final class SessionHandler {
         return $this->exists($key);
     }
 
+    /**
+     * @access public
+     *
+     * close the Session
+     */
+    public function close()
+    {
+        session_write_close();
+    }
+
+    /**
+     * @access public
+     * @param bool $del_old
+     *
+     * generates a new Session-ID
+     */
+    public function newID($del_old = false)
+    {
+        session_regenerate_id($del_old);
+    }
+
+    /**
+     * @access public
+     * @return string
+     *
+     * returns the current Session-ID
+     */
+    public function getID()
+    {
+        return session_id();
+    }
+
+    /**
+     * @access public
+     *
+     * destroy the Session
+     */
+    public function destroy()
+    {
+        session_destroy();
+    }
+
+    /**
+     * @access public
+     *
+     * Destruktor
+     */
+    public function __destruct()
+    {
+        $this->close();
+    }
 
     /**
      * Implements the Singleton

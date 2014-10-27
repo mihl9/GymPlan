@@ -1,28 +1,28 @@
 <?php
-//Datenbank - Klasse
-define('MYSQL_HOST', "localhost");
-define('MYSQL_USER' ,"root");
-define('MYSQL_PW' ,"");
-define('MYSQL_DB', "m151");
+//Loads the LIBs
 include_once('./config/Config.php');
-include_once('./lib/DatabaseHandler.php') ;
+include_once('./lib/DatabaseHandler.class.php') ;
+include_once('./lib/SessionHandler.class.php');
+
 // MVC laden
 function application_loader ($ControllerName)  {  
-	$controller = './applikation/controller/'. $ControllerName . '.php';
-	$model = './applikation/model/'. $ControllerName . '.php';
-	$view= './applikation/view/'. $ControllerName . '.php';
+	$controller = './applikation/controller/'. $ControllerName . '.class.php';
+	$model = './applikation/model/'. $ControllerName . '.class.php';
+	$view= './applikation/view/'. $ControllerName . '.class.php';
 	include_once($controller) ;
 	include_once($model) ;
 	include_once($view) ;
 }
-// welcher Controller soll geladen werden
+
+// choose which controller shoudl be loaded
 if(isset($_GET['controller'])){ 
 	$lade = $_GET['controller'];
 }else{
-	$lade = 'index';
+	$lade = 'uebersicht';
 }
+
 application_loader($lade);
-// Controller erstellen und Anzeige
+// Create controller and display
 $controller   = new controller(); 
 echo $controller->display();  
 ?>
