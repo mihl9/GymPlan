@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc1cb2a4-9095-411e-88c1-a86adcf4e6b0" name="Default" comment="Created Structure for the Project.&#10;Created already the necessary files.">
+    <list default="true" id="fc1cb2a4-9095-411e-88c1-a86adcf4e6b0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GymPlan.iws" />
@@ -306,6 +306,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -343,6 +344,9 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SpellCheckerSettings" BundledDictionaries="6" BundledDictionary0="jetbrains.dic" BundledDictionary1="twig.dic" BundledDictionary2="english.dic" BundledDictionary3="less.dic" BundledDictionary4="php.dic" BundledDictionary5="css.dic" Folders="0" Dictionaries="0" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="fc1cb2a4-9095-411e-88c1-a86adcf4e6b0" name="Default" comment="" />
@@ -374,7 +378,13 @@
       <option name="project" value="LOCAL" />
       <updated>1414423666125</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Created Structure for the Project.&#10;Created already the necessary files.">
+      <created>1414423684199</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1414423684199</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
