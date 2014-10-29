@@ -6,7 +6,7 @@
  * Time: 14:07
  */
 
-final class SessionHandler {
+final class FWSessionHandler {
     /**
      * @access private static
      * @var SessionHandler $instance
@@ -32,7 +32,7 @@ final class SessionHandler {
      */
     public function __set($key, $value)
     {
-        $_SESSION[SessionHandler::$sessionArrayKey][$key] = $value;
+        $_SESSION[FWSessionHandler::$sessionArrayKey][$key] = $value;
     }
 
     /**
@@ -46,7 +46,7 @@ final class SessionHandler {
     {
         if($this->exists($key))
         {
-            unset($_SESSION[SessionHandler::$sessionArrayKey][$key]);
+            unset($_SESSION[FWSessionHandler::$sessionArrayKey][$key]);
             return true;
         }
         else
@@ -66,7 +66,7 @@ final class SessionHandler {
     {
         if($this->exists($key))
         {
-            return $_SESSION[SessionHandler::$sessionArrayKey][$key];
+            return $_SESSION[FWSessionHandler::$sessionArrayKey][$key];
         }
         else
         {
@@ -84,7 +84,7 @@ final class SessionHandler {
      */
     public function exists($key)
     {
-        return (isset($_SESSION[SessionHandler::$sessionArrayKey][$key]) ? true : false);
+        return (isset($_SESSION[FWSessionHandler::$sessionArrayKey][$key]) ? true : false);
     }
 
     /**
@@ -176,9 +176,9 @@ final class SessionHandler {
      */
     private function __construct(){
         session_start();
-        if(!isset($_SESSION[SessionHandler::$sessionArrayKey]))
+        if(!isset($_SESSION[FWSessionHandler::$sessionArrayKey]))
         {
-            $_SESSION[SessionHandler::$sessionArrayKey] = array();
+            $_SESSION[FWSessionHandler::$sessionArrayKey] = array();
         }
     }
 

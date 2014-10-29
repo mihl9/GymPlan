@@ -5,7 +5,7 @@
  * Date: 23.10.2014
  * Time: 14:08
  */
-
+/*
 abstract class AbsModel {
     protected $database;
 

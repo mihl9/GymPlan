@@ -1,11 +1,15 @@
 <?php
-//Loads the LIBs
+//load the abstract classes
+include_once('./applikation/controller/AbsController.class.php');
+include_once('./applikation/model/AbsModel.class.php');
+include_once('./applikation/view/AbsView.class.php');
+//Load the LIBs
 include_once('./config/Config.php');
-include_once('./lib/SessionHandler.class.php');
+include_once('./lib/FWSessionHandler.class.php');
 include_once('./lib/DatabaseHandler.class.php') ;
 
 
-// MVC laden
+// load MVC
 function application_loader ($ControllerName)  {
 	$controller = './applikation/controller/'. $ControllerName . '.class.php';
 	$model = './applikation/model/'. $ControllerName . '.class.php';
@@ -25,7 +29,7 @@ function run($controller, $action){
 }
 
 
-// choose which controller shoudl be loaded
+// choose which controller should be loaded
 if(isset($_GET['controller'])){ 
 	$lade = $_GET['controller'];
 }else{

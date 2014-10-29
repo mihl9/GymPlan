@@ -15,6 +15,9 @@ class DatabaseHandler {
     private $mysqlUser;
     private $mysqlPw;
     private $mysqlDB;
+
+    public $_results;
+
     public function __construct() {
         // sdfasfd config ini
         $config = Config::getInstance();
@@ -25,7 +28,8 @@ class DatabaseHandler {
     }
 
     public function __destruct() {
-        $this->close();
+        $this->_results = "";
+        //$this->close();
     }
     private function open(){
         $result=true;
@@ -77,6 +81,8 @@ class DatabaseHandler {
             $success=$statement->execute();
             if($success){
                 $tmpResult = $statement->get_result();
+                //save the raw result
+                $this->_results = $tmpResult;
                 while($row = $tmpResult->fetch_array()){
                     $result[] = $row;
                 }
@@ -84,10 +90,12 @@ class DatabaseHandler {
                 //failed to execute
                 //return false;
                 $result = false;
+                $this->_results = "";
             }
         }else{
             //error within the sql string
             //return false;
+            $this->_results = "";
             $result = false;
         }
         $this->close();

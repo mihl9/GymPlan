@@ -22,20 +22,15 @@ abstract class AbsController {
     public function __destruct(){
         //Set the var to true that the Controller is not loaded
         //this is necessary for the Navigationbar
-        self::$isActive = false;
+        self::$ActiveController = false;
         $this->view = null;
         $this->model = null;
     }
 
     protected function checkIfLogedIn($bShowLogginBox){
-        $session = SessionHandler::getInstance();
         $config = Config::getInstance();
-        if(isset($session->isLoggedIn)){
-            if($session->isLoggedIn==true){
-                $this->view->DisplayLoginBoxLoggedIn($this->model->getLogedInUserInformation);
-            }else{
-                $this->view->DisplayLoginBox($config->getConfig('canRegister'));
-            }
+        if($this->model->isLoggedIn()){
+            $this->view->DisplayLoginBoxLoggedIn($this->model->getLogedInUserInformation);
         }else{
             $this->view->DisplayLoginBox($config->getConfig('canRegister'));
         }

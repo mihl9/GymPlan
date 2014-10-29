@@ -5,7 +5,7 @@
  * Date: 23.10.2014
  * Time: 14:09
  */
-
+/*
 class UserModel extends AbsModel {
     public function addUser(User $user) {
         $this->database->execute("Insert into users (username, password) VALUES ('$user->Name', '$user->Password')");

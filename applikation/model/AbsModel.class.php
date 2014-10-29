@@ -18,7 +18,7 @@ abstract class AbsModel {
         //prepare the count command
         $sql = 'SELECT count(UserID) as count FROM t_users where UserNickname='.$username.'UserPasswort'.sha1($password).';';
         //open the session handler
-        $session = SessionHandler::getInstance();
+        $session = FWSessionHandler::getInstance();
         if($this->database->GetNumberOfRows($sql)==1){
             $session->isLoggedIn=true;
             $SQL="SELECT UserID FROM t_users WHERE UserNickname=".$username."UserPasswort".sha1($password).";";
@@ -33,8 +33,23 @@ abstract class AbsModel {
 
     public function getLogedInUserInformation(){
         $result=array();
-        $session = SessionHandler::getInstance();
+        $session = FWSessionHandler::getInstance();
         $result = $this->database->executeWithResult("SELECT * FROM t_users WHERE UserID=".$session->UserID);
+        return $result;
+    }
+
+    public function isLoggedIn(){
+        $result = false;
+        $session = FWSessionHandler::getInstance();
+        if(isset($session->isLoggedIn)){
+            if($session->isLoggedIn==true){
+                $result = true;
+            }else{
+                $result=false;
+            }
+        }else{
+            $result=false;
+        }
         return $result;
     }
 } 
