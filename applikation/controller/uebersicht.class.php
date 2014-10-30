@@ -41,7 +41,35 @@ class controller extends AbsController{
             $this->view->showModalWindow();
             $this->run();
         }elseif(isset($_POST['btnSaveChanges'])){
-            
+            $data=array();
+            $data['EinheitID']=$_POST['EinheitID'];
+            $data['EinheitTrinID_FK']=$this->model->GetSelectedPlan();
+            $data['EinheitDatum']=$_POST['EinheitDate'];
+            $count=0;
+            $i=0;
+            //$data['Uebungen']=$this->getTrainPlanUebungen($this->GetSelectedPlan());
+            $data['Uebungen'] = array();
+            while(isset($_POST[$count])){
+                $data['Uebungen'][$i]['UebEinheitID_FK']=$_POST['EinheitID'];
+                $data['Uebungen'][$i]['UebGeraeteID_FK']=$_POST[$count];
+                $count++;
+                $data['Uebungen'][$i]['UebGewicht']=$_POST[$count];
+                $count++;
+                $data['Uebungen'][$i]['UebWiederholungen']=$_POST[$count];
+                $count++;
+                $data['Uebungen'][$i]['UebSaetze']=$_POST[$count];
+                $count++;
+                $data['Uebungen'][$i]['UebID']=$_POST[$count];
+                $count++;
+                $i++;
+            }
+            if($data['EinheitID']==0) {
+                $this->model->addEinheit($data);
+            }else {
+                $this->model->UpdateEinheit($data);
+            }
+            $this->reload();
+        }else{
             $this->reload();
         }
 

@@ -108,7 +108,15 @@ class model extends AbsModel
     }
 
     public function addEinheit($Data){
-
+        $user=$this->getLogedInUserInformation();
+        if($user) {
+            $sql="INSERT INTO t_einheit (EinheitTrinID_FK,EinheitDatum) VALUES (".$Data['EinheitTrinID_FK'].",'".date('Y-m-d h:i',strtotime(@$Data['EinheitDatum']))."')";
+            $this->database->execute($sql);
+            $lastID=$this->database->GetLastID();
+            foreach($Data['Uebungen'] as $row){
+                $this->addUebung($row, $lastID);
+            }
+        }
     }
 
     public function delEinheit($EinheitID){
@@ -124,10 +132,12 @@ class model extends AbsModel
 
     }
 
-    private function addUebung($data){
+    private function addUebung($data, $EinheitID){
         $user=$this->getLogedInUserInformation();
         if($user) {
-
+            $sql='INSERT INTO t_uebungen (UebEinheitID_FK,UebGeraeteID_FK,UebGewicht,UebSaetze,UebWiederholungen)
+                  VALUES ('.$EinheitID.','. $data['UebGeraeteID_FK'] .','. $data['UebGewicht'] .','. $data['UebSaetze'].','. $data['UebWiederholungen'] .')';
+            $this->database->execute($sql);
         }
     }
 

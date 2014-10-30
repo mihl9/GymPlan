@@ -162,7 +162,8 @@ class view extends AbsView{
                 $_count++;
                 $_Result=$_Result . '<td><input type="text" class="form-control" name="' . $_count . '" value="' . $row['UebWiederholungen'] . '"></td>';
                 $_count++;
-                $_Result=$_Result . '<td><input type="text" class="form-control" name="' . $_count . '" value="' . $row['UebSaetze'] . '"></td>';
+                $_Result=$_Result . '<td><input type="text" class="form-control" name="' . $_count . '" value="' . $row['UebSaetze'] . '"> </td> <input type="hidden" name="' . ($_count+1) . '" value="' . $row['UebID'] . '" />';
+                $_count++;
                 $_count++;
                 $_Result=$_Result . "</tr>";
             }

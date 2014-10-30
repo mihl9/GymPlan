@@ -106,7 +106,8 @@ class DatabaseHandler {
     public function GetLastID(){
         $result=0;
         //todo: funktion implementieren
-        $SQL="";
+        $SQL="SELECT last_insert_id() as last";
+        $result=$this->executeWithResult($SQL)[0];
         return $result;
     }
 
