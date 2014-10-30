@@ -23,7 +23,7 @@
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <!--<li <?php if($content=="uebersicht") echo 'class="active"' ?> ><a href="?content=uebersicht">Übersicht</a></li>-->
+                            <!--<li <?php if($_GET['controller']=="uebersicht") echo 'class="active"' ?> ><a href="?content=uebersicht">Übersicht</a></li>-->
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Übersicht <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -31,8 +31,8 @@
                                     <li><a href="?controller=uebersicht&tab=2">Verlauf</a></li>
                                 </ul>
                             </li>
-                            <li <?php if($content=="trainingsplaene") echo 'class="active"' ?>><a href="?controller=trainingsplaene">Trainingspläne</a></li>
-                            <li <?php if($content=="geraete") echo 'class="active"' ?>><a href="?controller=geraete">Geräte</a></li>
+                            <li <?php if($_GET['controller']=="trainingsplaene") echo 'class="active"' ?>><a href="?controller=trainingsplaene">Trainingspläne</a></li>
+                            <li <?php if($_GET['controller']=="geraete") echo 'class="active"' ?>><a href="?controller=geraete">Geräte</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -41,12 +41,12 @@
                 <div id="left_content">
                     <?php
                         // Content laden
-                        echo $this->data["Content"];
+                        echo $this->content["Content"];
                     ?>
                 </div>
                 <div id="right_content">
                     <?php
-                        echo $this->data["RightBoxes"];
+                        echo $this->content["RightBoxes"];
                     ?>
                 </div>
             </div>

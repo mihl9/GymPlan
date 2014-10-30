@@ -164,7 +164,7 @@ final class FWSessionHandler {
     public static function getInstance() {
         if(self::$instance === null)
         {
-            self::$instance = new SessionHandler();
+            self::$instance = new FWSessionHandler();
         }
         return self::$instance;
     }

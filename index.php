@@ -8,6 +8,8 @@ include_once('./config/Config.php');
 include_once('./lib/FWSessionHandler.class.php');
 include_once('./lib/DatabaseHandler.class.php') ;
 
+//defines the charset
+header('Content-Type: text/html; charset=UTF-8');
 
 // load MVC
 function application_loader ($ControllerName)  {
@@ -20,7 +22,7 @@ function application_loader ($ControllerName)  {
 }
 
 function run($controller, $action){
-    if(is_callable($controller,$action)){
+    if(is_callable(array($controller,$action))){
         $controller->$action();
     }else{
         $controller->run();
@@ -34,11 +36,12 @@ if(isset($_GET['controller'])){
 	$lade = $_GET['controller'];
 }else{
 	$lade = 'uebersicht';
+    $_GET['controller']='uebersicht';
 }
 
 application_loader($lade);
 // Create controller and display
-$controller   = new controller();
+$controller = new controller();
 
 if(isset($_GET['action'])){
     $action = $_GET['action'];

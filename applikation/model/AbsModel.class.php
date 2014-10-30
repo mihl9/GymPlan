@@ -8,7 +8,7 @@
 
 abstract class AbsModel {
     protected $database;
-
+    public $data;
     public function __construct() {
         $this->database = new DatabaseHandler();
     }
@@ -16,19 +16,23 @@ abstract class AbsModel {
     public function checkLoginData($username,$password){
         $result = false;
         //prepare the count command
-        $sql = 'SELECT count(UserID) as count FROM t_users where UserNickname='.$username.'UserPasswort'.sha1($password).';';
+        $sql = 'SELECT count(UserID) as count FROM t_users WHERE UserNickname="'.$username.'" and UserPasswort="'.sha1($password).'";';
         //open the session handler
         $session = FWSessionHandler::getInstance();
         if($this->database->GetNumberOfRows($sql)==1){
             $session->isLoggedIn=true;
-            $SQL="SELECT UserID FROM t_users WHERE UserNickname=".$username."UserPasswort".sha1($password).";";
-            $session->UserID=$this->database->executeWithResult($sql)['UserID'];
+            $sql='SELECT UserID FROM t_users WHERE UserNickname="'.$username.'" and UserPasswort="'.sha1($password).'";';
+            $session->UserID=$this->database->executeWithResult($sql)[0][0];
             $result=true;
         }else{
             $session->isLoggedIn=false;
             $result=false;
         }
         return $result;
+    }
+
+    private function UpdateLastLogin($UserID){
+
     }
 
     public function getLogedInUserInformation(){

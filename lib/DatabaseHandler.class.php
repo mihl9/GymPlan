@@ -83,6 +83,7 @@ class DatabaseHandler {
                 $tmpResult = $statement->get_result();
                 //save the raw result
                 $this->_results = $tmpResult;
+
                 while($row = $tmpResult->fetch_array()){
                     $result[] = $row;
                 }
@@ -110,10 +111,9 @@ class DatabaseHandler {
     }
 
     public function GetNumberOfRows($sql){
-        $result=0;
         //todo: funktion implementieren
-        $result = $this->executeWithResult($sql)['count'];
-        return $result;
+        $result = $this->executeWithResult($sql);
+        return $result[0][0];
     }
 
     private function install()
