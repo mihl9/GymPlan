@@ -133,19 +133,43 @@ abstract class AbsView {
                     <strong>'. $Titel .'</strong> ' . $message .'
                 </div>';
         }
-        if($key=""){
+        if($key==""){
             return $html;
         }else {
             $this->content[$key] = $html;
         }
     }
 
+    public function showModalWindow(){
+        $this->setContent("Javascript","$('#ModalEdit').modal('show');");
+    }
     /**
      * Insert the Code for a Modal Window into the Content Array
      * @param string $content the inner html of the modal window
+     * @param $action string
+     * @param $titel string
      */
-    public function DisplayModalWindow($content){
-
+    public function LoadModalWindow($content,$titel,$action){
+        $html = '<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="myModalLabel">'. $titel .'</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form role="form" name="FrmEditModal" id="FrmEditModal" action="?controller='. $_GET['controller'] .'&action='. $action .'" method="post">
+                                    '. $content .'
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Schliessen</button>
+                                <button type="submit" form="FrmEditModal" class="btn btn-primary" name="btnSaveChanges" value="<?php echo $_SaveMode; ?>">Speichern</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+        $this->setContent("modalBox",$html);
     }
 
     /**

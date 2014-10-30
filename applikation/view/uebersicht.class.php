@@ -23,7 +23,7 @@ class view extends AbsView{
 			                <tbody>';
                 foreach($row['Uebungen'] as $rowUebung){
                     $result.='<tr>';
-                    $result.='<td>'.$rowUebung['GerateName'].'</td>';
+                    $result.='<td>'.$rowUebung['GeraeteName'].'</td>';
                     $result.='<td>'.$rowUebung['UebGewicht'].'</td>';
                     $result.='<td>'.$rowUebung['UebWiederholungen'].'</td>';
                     $result.='<td>'.$rowUebung['UebSaetze'].'</td>';
@@ -44,7 +44,7 @@ class view extends AbsView{
 						<button type="submit" class="btn btn-default" name="btnNew" value="new">Neu</button>
 					</div>
 				</div>
-			</form>';
+			</form><hr/>';
 
             }
         }else{
@@ -102,10 +102,76 @@ class view extends AbsView{
                 </form>
                 <br/>';
         }else{
-            $_result="Keine Daten vorhanden";
+            //$_result="Keine Daten vorhanden";
+            $_result="";
         }
         $this->setContent('PlanCombobox',$_result);
         //return $_result;
+    }
+
+    /**
+     *
+     * @param $data array the Data which should be displayed
+     * @param $Modal boolean
+     * @param $title string
+     */
+    public function showEinheitenDialog($data, $title,$Modal){
+        if($Modal){
+            $_Result='<div class="form-group">
+								<label for="datetimepicker">Datum</label>';
+            $_Result.= '<input id="datetimepicker" class="form-control" name="EinheitDate" type="text" value="' . date("d.m.Y",strtotime(@$data['EinheitDatum'])) . '">';
+            $_Result.= '</div>';
+            $_Result.= '<script type="text/javascript">';
+            $_Result.= "jQuery('#datetimepicker').datetimepicker({
+							 lang:'de',
+							 i18n:{
+							  de:{
+							   months:[
+							    'Januar','Februar','März','April',
+							    'Mai','Juni','Juli','August',
+							    'September','Oktober','November','Dezember',
+							   ],
+							   dayOfWeek:[
+							    'So.', 'Mo', 'Di', 'Mi',
+							    'Do', 'Fr', 'Sa.',
+							   ]
+							  }
+							 },
+							 timepicker:false,
+							 format:'d.m.Y'
+							});
+							</script>";
+            $_Result .= '<td><input type="hidden" class="form-control" name="EinheitID" value="' . $data['EinheitID'] . '"></td>';
+            $_Result .='<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td>Gerät</td>
+							<td>Gewicht (KG)</td>
+							<td>Wiederholung</td>
+							<td>Sätze</td>';
+            $_Result .= '
+						</tr>
+					</thead>
+					<tbody>';
+            $_count=0;
+            foreach($data['Uebungen'] as $row){
+                $_Result=$_Result . '<tr>';
+                $_Result=$_Result . '<td>' . $row['GeraeteName'] . '<input type="hidden" name="' . $_count . '" value="' . $row['GeraeteID'] . '" /></td>';
+                $_count++;
+                $_Result=$_Result . '<td><input type="text" class="form-control" name="' . $_count . '" value="' . $row['UebGewicht'] . '"></td>';
+                $_count++;
+                $_Result=$_Result . '<td><input type="text" class="form-control" name="' . $_count . '" value="' . $row['UebWiederholungen'] . '"></td>';
+                $_count++;
+                $_Result=$_Result . '<td><input type="text" class="form-control" name="' . $_count . '" value="' . $row['UebSaetze'] . '"></td>';
+                $_count++;
+                $_Result=$_Result . "</tr>";
+            }
+
+            $_Result .='</tbody></table>';
+        }else{
+
+        }
+        $this->LoadModalWindow($_Result,$title,"editEinheit");
     }
 
     public function setTemplate($template){
@@ -114,6 +180,7 @@ class view extends AbsView{
             $this->Template = $templatePath;
         }
     }
+
 
 }
 ?>

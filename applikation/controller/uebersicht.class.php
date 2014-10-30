@@ -12,10 +12,10 @@ class controller extends AbsController{
             if($tab==1){
                 $this->view->DisplayEinheit($this->model->getCurrentEinheit());
             }else{
-
+                $this->view->DisplayEinheit($this->model->getHistoryEinheiten());
             }
         }else {
-            $this->view->DisplayMessageLabel("Diese Seite benötigt ein gültiges Login.", 2,false,"Content");
+            $this->view->DisplayMessageLabel("Diese Seite benötigt ein gültiges Login.", 2,false, "Content");
         }
         $this->view->setTemplate("simple");
         echo $this->view->getTemplateContent();
@@ -29,8 +29,23 @@ class controller extends AbsController{
     }
 
     public function editEinheit(){
+        if(isset($_POST['btnDel'])){
+            $this->model->delEinheit($_POST['EinheitID']);
+            $this->reload();
+        }elseif(isset($_POST['btnEdit'])){
+            $this->view->showEinheitenDialog($this->model->getEinheit($_POST['EinheitID'])[0],"Einheit bearbeiten",true);
+            $this->view->showModalWindow();
+            $this->run();
+        }elseif(isset($_POST['btnNew'])){
+            $this->view->showEinheitenDialog($this->model->getNewEinheit(),"Neue Einheit",true);
+            $this->view->showModalWindow();
+            $this->run();
+        }elseif(isset($_POST['btnSaveChanges'])){
+            
+            $this->reload();
+        }
 
-        $this->run();
+
     }
 }
 ?>

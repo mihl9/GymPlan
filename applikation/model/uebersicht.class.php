@@ -9,9 +9,11 @@ class model extends AbsModel
     public function getCurrentEinheit(){
         $user=$this->getLogedInUserInformation();
         if($user) {
-            $sql = 'SELECT * FROM t_einheit WHERE EinheitTrinID_FK='. $user[0]['UserID'] .' order by EinheitDatum DESC Limit 1;';
+            $sql = 'SELECT * FROM t_einheit WHERE EinheitTrinID_FK='. $this->GetSelectedPlan() .' order by EinheitDatum DESC Limit 1;';
             $result = $this->database->executeWithResult($sql);
-            $result[0]['Uebungen'] = $this->getEinheitUebungen($result[0]['EinheitID']);
+            if($result) {
+                $result[0]['Uebungen'] = $this->getEinheitUebungen($result[0]['EinheitID']);
+            }
         }
         return $result;
     }
@@ -21,8 +23,26 @@ class model extends AbsModel
         $result=$this->database->executeWithResult($sql);
         return $result;
     }
-    public function getHistoryEinheiten(){
 
+    private  function getTrainPlanUebungen($TrainPlanID){
+        $sql = 'SELECT * FROM t_uebungen inner join t_geraete on t_uebungen.UebGeraeteID_FK=t_geraete.GeraeteID WHERE UebTrainID_FK='.$TrainPlanID;
+        $result=$this->database->executeWithResult($sql);
+        return $result;
+    }
+    public function getHistoryEinheiten(){
+        $user=$this->getLogedInUserInformation();
+        if($user) {
+            $sql = 'SELECT * FROM t_einheit WHERE EinheitTrinID_FK='. $this->GetSelectedPlan() .' order by EinheitDatum DESC;';
+            $result = $this->database->executeWithResult($sql);
+            if($result) {
+                $count=0;
+                foreach($result as $row) {
+                    $result[$count]['Uebungen'] = $this->getEinheitUebungen($row['EinheitID']);
+                    $count++;
+                }
+            }
+        }
+        return $result;
     }
 
     public function getTrainingsplaene(){
@@ -34,6 +54,23 @@ class model extends AbsModel
             $result=false;
         }
         return $result;
+    }
+
+    public function getNewEinheit(){
+        $result = $this->getCurrentEinheit();
+        if($result){
+            $result[0]['EinheitID']=0;
+            $result[0]['EinheitTrinID_FK']=$this->GetSelectedPlan();
+            $result[0]['EinheitDatum']=date("Y-m-d h:i", time());
+        }else{
+            $result=array();
+            $result[0]=array();
+            $result[0]['EinheitID']=0;
+            $result[0]['EinheitTrinID_FK']=$this->GetSelectedPlan();
+            $result[0]['EinheitDatum']=date("Y-m-d h:i", time());
+            $result[0]['Uebungen']=$this->getTrainPlanUebungen($this->GetSelectedPlan());
+        }
+        return $result[0];
     }
     /**
      *
@@ -58,6 +95,49 @@ class model extends AbsModel
         return $session->SelectedPlan;
     }
 
+    public function getEinheit($EinheitID){
+        $user=$this->getLogedInUserInformation();
+        if($user) {
+            $sql = 'SELECT * FROM t_einheit WHERE EinheitTrinID_FK='. $user[0]['UserID'] .' AND EinheitID='. $EinheitID .';';
+            $result = $this->database->executeWithResult($sql);
+            if($result) {
+                $result[0]['Uebungen'] = $this->getEinheitUebungen($result[0]['EinheitID']);
+            }
+        }
+        return $result;
+    }
+
+    public function addEinheit($Data){
+
+    }
+
+    public function delEinheit($EinheitID){
+        $user=$this->getLogedInUserInformation();
+        if($user) {
+            $sql = "DELETE FROM t_einheit WHERE EinheitID=". $EinheitID;
+            $this->delUebung("UebEinheitID=".$EinheitID);
+            $this->database->execute($sql);
+        }
+    }
+
+    public function UpdateEinheit($Data){
+
+    }
+
+    private function addUebung($data){
+        $user=$this->getLogedInUserInformation();
+        if($user) {
+
+        }
+    }
+
+    private function delUebung($Where){
+        $user=$this->getLogedInUserInformation();
+        if($user) {
+            $sql='DELETE FROM t_uebungen WHERE'. $Where;
+            $this->database->execute($sql);
+        }
+    }
     /**
      * @param $Value
      */

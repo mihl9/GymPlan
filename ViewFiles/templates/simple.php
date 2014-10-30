@@ -38,6 +38,13 @@
                 </div><!-- /.container-fluid -->
             </nav>
             <div id="content">
+                <?php
+                // Content laden
+                echo @$this->content["modalBox"];
+                ?>
+                <script type="text/javascript">
+                    <?php echo $this->content["Javascript"]; ?>
+                </script>
                 <div id="left_content">
                     <?php
                         // Content laden
