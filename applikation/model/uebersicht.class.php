@@ -128,10 +128,27 @@ class model extends AbsModel
         }
     }
 
-    public function UpdateEinheit($Data){
-
+    public function updateEinheit($Data){
+        $user=$this->getLogedInUserInformation();
+        if($user){
+            $sql = "UPDATE t_einheit (
+            EinheitTrinID_FK=".$Data['EinheitTrinID_FK'].", EinheitDatum='".date('Y-m-d h:i',strtotime(@$Data['EinheitDatum']))."'
+            WHERE EineheitID=".$Data['EinheitID']." )";
+            $this->database->execute($sql);
+            foreach($Data['Uebungen'] as $row){
+                $this->updateUebungen($row);
+            }
+        }
     }
 
+    private function updateUebungen($data){
+        $user=$this->getLogedInUserInformation();
+        if($user){
+            $sql = "UPDATE t_Einheit ()";
+            $this->database->execute($sql);
+            //todo: fertig implementieren
+        }
+    }
     private function addUebung($data, $EinheitID){
         $user=$this->getLogedInUserInformation();
         if($user) {
