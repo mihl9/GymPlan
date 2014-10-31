@@ -1,7 +1,7 @@
 <?php
 class model extends AbsModel
 {
-    public function getGerate($ID){
+    public function getGeraete($ID){
         $user=$this->getLogedInUserInformation();
         if($user){
             if($ID==0){
@@ -27,8 +27,5 @@ class model extends AbsModel
 
     }
 
-    public function getGeraete(){
-
-    }
 }
 ?>

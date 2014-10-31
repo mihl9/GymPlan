@@ -123,7 +123,7 @@ class model extends AbsModel
         $user=$this->getLogedInUserInformation();
         if($user) {
             $sql = "DELETE FROM t_einheit WHERE EinheitID=". $EinheitID;
-            $this->delUebung("UebEinheitID=".$EinheitID);
+            $this->delUebung("UebEinheitID_FK=".$EinheitID);
             $this->database->execute($sql);
         }
     }
@@ -161,7 +161,7 @@ class model extends AbsModel
     private function delUebung($Where){
         $user=$this->getLogedInUserInformation();
         if($user) {
-            $sql='DELETE FROM t_uebungen WHERE'. $Where;
+            $sql='DELETE FROM t_uebungen WHERE '. $Where;
             $this->database->execute($sql);
         }
     }

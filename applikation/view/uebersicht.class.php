@@ -31,7 +31,7 @@ class view extends AbsView{
                 }
 
                 $result.='</tbody></table>';
-                $result.='<form name="FrmEdit" action="?controller=' . $_GET['controller'] . '&action=editEinheit" method="post">
+                $result.='<form name="FrmEdit" action="?controller=' . $_GET['controller'] . '&action=editEinheit&tab='.@$_GET['tab'] .'" method="post">
 				<input type="hidden" name="EinheitID" value="' . $row['EinheitID'] . '" />
 				<div class="row">
 					<div class="col-md-1 ">
@@ -60,7 +60,7 @@ class view extends AbsView{
 			                </thead>
 			                <tbody>';
             $result.='</tbody></table>';
-            $result.='<form name="FrmEdit" action="?controller=' . $_GET['controller'] . '&action=editEinheit" method="post">
+            $result.='<form name="FrmEdit" action="?controller=' . $_GET['controller'] . '&action=editEinheit&tab='.@$_GET['tab'].'" method="post">
 				<div class="row">
 					<div class="col-md-1 ">
 						<button type="submit" class="btn btn-default" name="btnDel" disabled="disabled" value="del">Löschen</button>
@@ -84,7 +84,7 @@ class view extends AbsView{
     public function DisplayTrainPlanCombobox($data,$_Selection){
         $_ObjID="SelectedPlan";
         if($data){
-            $_result='<form name="FrmChangePlan" action="?controller='. $_GET['controller'] .'&action=changePlan" method="post">
+            $_result='<form name="FrmChangePlan" action="?controller='. $_GET['controller'] .'&action=changePlan&tab='.@$_GET['tab'].'" method="post">
                         <div class="row">
                             <div class="col-xs-3">';
             $_result.='<select name="' . $_ObjID . '" class="form-control">';
@@ -172,7 +172,7 @@ class view extends AbsView{
         }else{
 
         }
-        $this->LoadModalWindow($_Result,$title,"editEinheit");
+        $this->LoadModalWindow($_Result,$title,"editEinheit&tab=".$_GET['tab']);
     }
 
     public function setTemplate($template){

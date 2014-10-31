@@ -62,7 +62,7 @@ class DatabaseHandler {
             $successful = $statement->execute();
             if($successful){
                 $test =$statement->fetch();
-                $this->$_lastStatment= $statement;
+                $this->_lastStatment= $statement;
             }else{
                 //error executing the query
                 $successful = false;
