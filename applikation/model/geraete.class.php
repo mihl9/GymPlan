@@ -7,7 +7,7 @@ class model extends AbsModel
             if($ID==0){
                 $sql="SELECT * FROM t_geraete";
             }else{
-                $sql="SELECT * FROM t_geraete WHERE GeraeteID="$ID;
+                $sql="SELECT * FROM t_geraete WHERE GeraeteID=".$ID;
             }
             $result=$this->database->executeWithResult($sql);
             return $result;
@@ -19,7 +19,7 @@ class model extends AbsModel
     public function addGeraete($data){
         $user=$this->getLogedInUserInformation();
         if($user){
-            $sql="INSERT INTO t_geraete (GeraeteUserID_FK, GeraeteName, GeraeteBez) VALUES (".$data['GeraeteUserID_FK'].")"
+            $sql="INSERT INTO t_geraete (GeraeteUserID_FK, GeraeteName, GeraeteBez) VALUES (".$data['GeraeteUserID_FK'].")";
         }
     }
 

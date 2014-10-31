@@ -17,6 +17,7 @@ class DatabaseHandler {
     private $mysqlDB;
 
     public $_results;
+    private $_lastStatment;
 
     public function __construct() {
         // sdfasfd config ini
@@ -34,7 +35,7 @@ class DatabaseHandler {
     private function open(){
         $result=true;
 
-        $this->mysql = new mysqli($this->mysqlHost, $this->mysqlUser,$this->mysqlPw,$this->mysqlDB);
+        @$this->mysql = new mysqli($this->mysqlHost, $this->mysqlUser,$this->mysqlPw,$this->mysqlDB);
 
         if ($this->mysql->connect_error) {
             echo "Keine Datenbank vorhanden, wird erstellt.";
@@ -61,6 +62,7 @@ class DatabaseHandler {
             $successful = $statement->execute();
             if($successful){
                 $test =$statement->fetch();
+                $this->$_lastStatment= $statement;
             }else{
                 //error executing the query
                 $successful = false;
@@ -105,9 +107,9 @@ class DatabaseHandler {
 
     public function GetLastID(){
         $result=0;
-        //todo: funktion implementieren
-        $SQL="SELECT last_insert_id() as last";
-        $result=$this->executeWithResult($SQL)[0];
+        if(isset($this->_lastStatment)){
+            $result=$this->_lastStatment->insert_id;
+        }
         return $result;
     }
 
@@ -119,15 +121,10 @@ class DatabaseHandler {
 
     private function install()
     {
-        $this->_con = new mysqli(MYSQL_HOST, MYSQL_USER, MYSQL_PW);
+        $this->mysql = new mysqli($this->mysqlHost, $this->mysqlUser, $this->mysqlPw);
         //todo: Installationscript der Datenbank erstellen und implementieren
-        $sqlstr = "CREATE DATABASE IF NOT EXISTS " . MYSQL_DB;
-        $this->_con->query($sqlstr);
-        $this->_con->select_db(MYSQL_DB);
-        $sqlstr = "";
-
-        $this->_con->query($sqlstr);
-        $sqlstr = "";
-        $this->_con->query($sqlstr);
+        $sqlstr = file_get_contents('./lib/install.sql', FILE_USE_INCLUDE_PATH);
+        $this->mysql->multi_query($sqlstr);
+        $this->mysql->close();
     }
 } 
