@@ -5,14 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/applikation/controller/uebersicht.class.php" line="19" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc1cb2a4-9095-411e-88c1-a86adcf4e6b0" name="Default" comment="Created Structure for the Project.&#10;Created already the necessary files.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/DatabaseHandler.class.php" afterPath="$PROJECT_DIR$/lib/DatabaseHandler.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/applikation/controller/geraete.class.php" afterPath="$PROJECT_DIR$/applikation/controller/geraete.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/applikation/model/geraete.class.php" afterPath="$PROJECT_DIR$/applikation/model/geraete.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/applikation/view/geraete.class.php" afterPath="$PROJECT_DIR$/applikation/view/geraete.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/applikation/model/uebersicht.class.php" afterPath="$PROJECT_DIR$/applikation/model/uebersicht.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/applikation/view/uebersicht.class.php" afterPath="$PROJECT_DIR$/applikation/view/uebersicht.class.php" />
-    </list>
+    <list default="true" id="fc1cb2a4-9095-411e-88c1-a86adcf4e6b0" name="Default" comment="Created Structure for the Project.&#10;Created already the necessary files." />
     <ignored path="GymPlan.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
